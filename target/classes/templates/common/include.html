@@ -1,0 +1,26 @@
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+
+</head>
+
+<body>
+
+<div th:fragment="csrf">
+    <script>
+        //发送请求前将csrfToken加入请求头
+        if (jQuery) {
+            jQuery.ajaxSetup({
+                "beforeSend": function (request) {
+                    //添加csrftoken
+                    request.setRequestHeader("[[${_csrf.headerName}]]", "[[${_csrf.token}]]");
+                }
+            });
+
+            //向form表单添加，csrf验证需要
+            var csrf = '<input name="[[${_csrf.parameterName}]]" value="[[${_csrf.token}]]" type="hidden" />';
+            $("form").append(csrf);
+        }
+    </script>
+</div>
+</body>
+</html>

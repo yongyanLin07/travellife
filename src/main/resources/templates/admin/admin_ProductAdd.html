@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>管理员</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" th:href="@{/assets/images/favicon.png}" href="../../static/assets/images/favicon.png">
+    <title>Travel Life | Admin</title>
+    <script type="text/javascript" th:src="@{/js/adminPage.js}" src="../../static/js/adminPage.js"></script>
+    <link href="../../static/css/style.min.css" th:href="@{/css/style.min.css}" rel="stylesheet">
+    <link href="../../static/css/adminPage.css" th:href="@{/css/adminPage.css}" rel="stylesheet">
+    <link href="../../static/css/allScripts.css" th:href="@{/css/allScripts.css}" rel="stylesheet">
+    <link href="../../static/assets/libs/chartist/dist/chartist.min.css" th:href="@{/assets/libs/chartist/dist/chartist.min.css}" rel="stylesheet">
+    <link href="../../static/assets/assets/images/favicon.png" th:href="@{/assets/assets/images/favicon.png}" rel="icon" type="image/png" sizes="16x16">
+
+</head>
+
+<body>
+    <div class="preloader">
+        <div class="lds-ripple">
+            <div class="lds-pos"></div>
+            <div class="lds-pos"></div>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- Main wrapper - style you can find in pages.scss -->
+    <!-- ============================================================== -->
+    <div id="main-wrapper" data-navbarbg="skin6" data-theme="light" data-layout="vertical" data-sidebartype="full" data-boxed-layout="full">
+
+        <div class="page-wrapper1" id="ManagePage">
+            <form action="#" th:action="@{/admin/ProductManage}" method="post"  id="myform" name="myform" enctype="multipart/form-data">
+             <div class="container-fluid">
+
+                 <!-- ============================================================== -->
+                 <!-- Start Page Content -->
+                 <!-- ============================================================== -->
+                     <div class="col-12">
+                         <div class="card">
+                             <div class="table-responsive">
+                                
+                                 <table class="table table-hover">
+                                     <thead>
+                                         <tr>
+                              
+                                             <th scope="col">Name</th>
+                                             <th scope="col">Category</th>
+                                             <th scope="col">Img</th>
+                                             <th scope="col">Price</th>
+                                             <th scope="col">Description</th>
+                                             <th scope="col">Stock</th>
+                                             <th scope="col">Recommend</th>
+                                             <th scope="col">Sale</th>
+
+                                         </tr>
+                                     </thead>
+                                     <tbody>
+                                         <tr>
+
+                                             <td><input type="text" id="name" name="name" placeholder="ProductName"></td>
+                                             <td>
+                                                 <select name="typeid">
+                                                     <option th:each="type : ${types}" th:value="${type.id}" th:text="${type.name}"></option>
+                                                 </select>
+                                             </td>
+                                             <td><input type="file" id="file" name="file" placeholder=""></td>
+                                             <td><input type="text" id="price" name="price" placeholder="Price"></td>
+                                             <td><input type="text" id="description" name="description" placeholder="Description"></td>
+                                             <td><input type="text" id="stock" name="stock" placeholder="Stock"></td>
+                                             <td><input type="text" id="recommend" name="recommend" placeholder="Recommend(1/0)"></td>
+                                             <td><input type="text" id="sale" name="sale" placeholder="Sale(1/0)"></td>
+                                         </tr>
+                                     </tbody>
+                                 </table>
+                             </div>
+                            
+                         </div>
+                     </div>
+         </div>
+         <button id="delete" type="submit" >添加</button>
+             <a href="#" th:href="@{/admin/ProductManage}"><button id="pay" type="button">返回</button></a>
+         </form>
+     </div>
+    </div>
+     <!-- ============================================================== -->
+     <!-- Jquery -->
+     <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- Jquery -->
+    <!-- ============================================================== -->
+    <script src="../../static/assets/libs/jquery/dist/jquery.min.js" th:src="@{/assets/libs/jquery/dist/jquery.min.js}"></script>
+    <!-- Bootstrap tether Core JavaScript -->
+    <script src="../../static/assets/libs/popper.js/dist/umd/popper.min.js" th:src="@{/assets/libs/popper.js/dist/umd/popper.min.js}"></script>
+    <script src="../../static/assets/libs/bootstrap/dist/js/bootstrap.min.js" th:src="@{/assets/libs/bootstrap/dist/js/bootstrap.min.js}"></script>
+    <!-- slimscrollbar scrollbar JavaScript -->
+    <script src="../../static/assets/extra-libs/sparkline/sparkline.js" th:src="@{/assets/extra-libs/sparkline/sparkline.js}"></script>
+    <!--Wave Effects -->
+    <script src="../../static/js/waves.js" th:src="@{/js/waves.js}"></script>
+    <!--Menu sidebar -->
+    <script src="../../static/js/sidebarmenu.js" th:src="@{/js/sidebarmenu.js}"></script>
+    <!--Custom JavaScript -->
+    <script src="../../static/js/custom.min.js" th:src="@{/js/custom.min.js}"></script>
+    <th:block th:include="./common/include :: csrf" />
+ </body>
+ </html>

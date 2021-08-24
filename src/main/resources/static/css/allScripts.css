@@ -1,0 +1,27 @@
+#delete,#pay{
+    width: 80px;
+    height: 40px;
+    border-radius: 15px;
+    border: solid 1px #009688;
+    background: #009688;
+    color: white;
+}
+#delete{
+    margin-left: 50px;
+}
+#pay{
+    float:right;
+    margin-right: 50px;
+}
+#delete:hover{
+    transform: scale(1.2);
+     
+    color: white;
+   
+}
+#pay:hover{
+    transform: scale(1.2);
+   
+    color: white;
+   
+}

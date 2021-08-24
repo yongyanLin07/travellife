@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="../static/assets/images/favicon.png" th:href="@{/assets/images/favicon.png}">
+    <title>Travel Life | USER CENTER</title>
+    <!-- Custom CSS -->
+    <link href="../static/css/style.min.css" th:href="@{/css/style.min.css}" rel="stylesheet">
+    <script type="text/javascript" src="../static/js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
+    <script type="text/javascript" src="../static/js/userOrder.js" th:src="@{/js/userOrder.js}"></script>
+    <link rel="stylesheet" href="../static/css/allScripts.css" th:href="@{/css/allScripts.css}" type="text/css" />
+    <link rel="stylesheet" href="../static/css/userPage.css" th:href="@{/css/userPage.css}" type="text/css" />
+
+</head>
+<body>
+<div class="preloader">
+        <div class="lds-ripple">
+            <div class="lds-pos"></div>
+            <div class="lds-pos"></div>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- Main wrapper - style you can find in pages.scss -->
+    <!-- ============================================================== -->
+    <div id="main-wrapper" data-navbarbg="skin6" data-theme="light" data-layout="vertical" data-sidebartype="full" data-boxed-layout="full">
+        <aside class="left-sidebar" data-sidebarbg="skin5">
+            <!-- Sidebar scroll-->
+            <div class="scroll-sidebar">
+                <!-- Sidebar navigation-->
+                <nav class="sidebar-nav">
+                    <ul id="sidebarnav">
+                        <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" aria-expanded="false">
+                                <i class="mdi mdi-face"></i>
+                                <span th:if="${session.user?.name != null}" class="hide-menu" th:text="'Hello'+${session.user.name}"></span>
+                                <span th:if="${session.user?.name == null}" class="hide-menu" th:text="Please Login"></span>
+
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" th:href="@{userPage}" aria-expanded="false">
+                                <i class="mdi mdi-account-network"></i>
+                                <span class="hide-menu">Profile</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" th:href="@{userCart}" aria-expanded="false">
+                                <i class="mdi mdi-arrange-bring-forward"></i>
+                                <span class="hide-menu">Cart</span>
+                            </a>
+                        </li>
+
+                        <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" th:href="@{userOrder}" aria-expanded="false">
+                                <i class="mdi mdi-file"></i>
+                                <span class="hide-menu">Order</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" th:href="@{/}" aria-expanded="false">
+                                <i class="mdi mdi-account-table"></i>
+                                <span class="hide-menu">Continue Shopping</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+                <!-- End Sidebar navigation -->
+            </div>
+            <!-- End Sidebar scroll-->
+        </aside>
+
+            <div class="page-wrapper">
+                        
+                        <div class="container-fluid">
+                            <!-- ============================================================== -->
+                            <!-- Start Page Content -->
+                            <!-- ============================================================== -->
+                               
+                                <div class="col-12">
+                                    <div class="card">
+                                        <div class="table-responsive">
+                                           
+                                            <table class="table table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th scope="col"><input class="allChoose" name="allChoose" type="checkbox"></th>
+                                                        <th scope="col">CartID</th>
+                                                        <th scope="col">ProductName</th>
+                                                        <th scope="col">IMG</th>
+                                                        <th scope="col">Price</th>
+                                                        <th scope="col">Quantity</th>
+                                                        <th scope="col">Total</th>
+                                                        <th scope="col">Manage</th>
+                                                       
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+
+                                                <tr th:each="cart,iter:${carts}" th:if="${cart.cartValid == 0}">
+                                                <td><input name="id" class="chooseBtn" th:value="${cart.id}" type="checkbox" ></td>
+                                                <td class="id" name="id" th:text="${cart.id}"></td>
+                                                <td th:text="${cart.getProduct().getName()}"></td>
+                                                <td><img th:src="@{/image/{img}(img=${cart.getProduct().img})}" width="80" height="80"></td>
+                                                <td id="price" th:text="${cart.product.price}"></td>
+                                                <td class="number">
+                                                <div class="item_count_i" >
+                                                <div class="num_count">
+                                                  <div class="count_d" >-</div>
+                                                  <div class="c_num"><input disabled="disabled" style="width: 25px;height:20px;text-align: center;background:whitesmoke;" datasrc="${cart.id}" id="quantity" name="num" th:value="${cart.num}"></div>
+                                                  <div class="count_i" >+</div>
+                                                </div> 
+                                                </div>
+                                                </td>
+                                                <td class="One"><input disabled="disabled" style="width: 80px;background: whitesmoke;" class="Onetotal" name="price" th:value="${cart.price}"></td>
+                                                <td>
+                                                
+                                                <a th:href="@{/CartDelete/{id}(id=${cart.id})}"><input type="button" value="删除" ></a>
+                                                </td>
+                                                </tr>
+
+                                                </tbody>
+                                            </table>
+                                            
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                               </div> 
+                               
+                               <div class="center">
+                                 
+                                 <ul class="pagination">
+                                  
+                                  <li><span class="totalprice"></span></li>
+                                 </ul>
+            </div>
+            </div>
+                    <button id="delete" style="float: right;margin-right: 40px;" onclick="toorder()">结算</button>
+
+    </div>
+            <!-- ============================================================== -->
+            <!-- Jquery -->
+            <!-- ============================================================== -->
+            <script src="../../static/assets/libs/jquery/dist/jquery.min.js" th:src="@{/assets/libs/jquery/dist/jquery.min.js}"></script>
+            <!-- Bootstrap tether Core JavaScript -->
+            <script src="../../static/assets/libs/popper.js/dist/umd/popper.min.js" th:src="@{/assets/libs/popper.js/dist/umd/popper.min.js}"></script>
+            <script src="../../static/assets/libs/bootstrap/dist/js/bootstrap.min.js" th:src="@{/assets/libs/bootstrap/dist/js/bootstrap.min.js}"></script>
+            <!-- slimscrollbar scrollbar JavaScript -->
+            <script src="../../static/assets/extra-libs/sparkline/sparkline.js" th:src="@{/assets/extra-libs/sparkline/sparkline.js}"></script>
+            <!--Wave Effects -->
+            <script src="../../static/js/waves.js" th:src="@{/js/waves.js}"></script>
+            <!--Menu sidebar -->
+            <script src="../../static/js/sidebarmenu.js" th:src="@{/js/sidebarmenu.js}"></script>
+            <!--Custom JavaScript -->
+            <script src="../../static/js/custom.min.js" th:src="@{/js/custom.min.js}"></script>
+
+            </body>
+            
+            </html>

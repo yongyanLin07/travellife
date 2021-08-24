@@ -1,0 +1,101 @@
+.da-img img{
+    width: 300px;
+    height: 200px;
+}
+.cau_left img{
+    width: 80px;
+    height: 60px;
+}
+.grid1_of_3 img{
+    width: 240px;
+    height: 130px;
+}
+.grid1_of_3 img:hover{
+    opacity: 0.6;
+    transform: scale(1.2);
+}
+li{
+    list-style: none;
+}
+#loginBtn{
+    position: relative;
+
+} 
+#loginDiv{
+    position: absolute;
+    top: 35px;
+    left: 20px;
+    z-index:99999;
+    border:solid 3px;
+    border-top:solid 3px #4CCFC1;
+    border-radius: 20px;
+    width: 250px;
+    height: 200px;
+    background: white;
+    color: rgba(83, 81, 81, 0.849);
+    display: none;
+}
+#loginDiv button{
+     width: 120px;
+     height: 40px;
+     color: white;
+     font-size: 20px;
+     background:#4CCFC1;
+     border-radius: 30px;
+     border: solid 1px #4CCFC1;
+     margin-left: 60px;
+     margin-top: 20px;
+}
+#loginDiv span,input{
+    float: left;
+    margin-left: 40px;
+}
+
+#registerLink a{
+    text-decoration:none;
+}
+#registerLink a:hover{
+     opacity: 0.6;
+}
+#loginBtn:hover #loginDiv{
+    display: block;
+}
+.errBox{
+    width: 600px;
+    height: 300px;
+    border:2px red solid;
+    background: #ce8483;
+    color: #c82333;
+    font-size: 30px;
+    margin: 0px auto;
+    opacity: 0.4;
+}
+#GoBtn{
+    width: 80px;
+    height: 40px;
+    background: #00AA88;
+    border: 1px solid #00AA88;
+    color: white;
+    line-height: 40px;
+    text-align: center;
+    font-size: 25px;
+    margin-left: 200px;
+}
+#GoBtn:hover{
+    transform: scale(1.2);
+    opacity: 0.8;
+}
+#cartBtn{
+    width: 180px;
+    height: 50px;
+    background: #5e5e5e;
+    border: 1px solid #5e5e5e;
+    color: snow;
+    font-size: 24px;
+    line-height: 50px;
+    text-align: center;
+}
+#cartBtn:hover{
+    background: #00AA88;
+    transform: scale(1.2);
+}

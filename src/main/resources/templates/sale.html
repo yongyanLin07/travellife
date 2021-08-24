@@ -1,0 +1,301 @@
+﻿<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+	<meta charset="UTF-8">
+	<title>TravelLife Website</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+	<link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet" type="text/css" media="all" />
+	<script type="text/javascript" th:src="@{/js/jquery.min.js}" src="../static/js/jquery.min.js"></script>
+	<script type="text/javascript" th:src="@{/js/index.js}" src="../static/js/index.js"></script>
+	<script type="text/javascript" th:src="@{/js/indexCheck.js}" src="../static/js/indexCheck.js"></script>
+	<link href="../static/css/index.css" th:href="@{/css/index.css}" rel="stylesheet" type="text/css" />
+
+	<!-- start slider -->
+	<link href="../static/css/slider.css" rel="stylesheet" th:href="@{/css/slider.css}" type="text/css" media="all" />
+	<script type="text/javascript" th:src="@{/js/modernizr.custom.28468.js}" src="../static/js/modernizr.custom.28468.js"></script>
+	<script type="text/javascript" th:src="@{/js/jquery.cslider.js}" src="../static/js/jquery.cslider.js"></script>
+	<!-- Owl Carousel Assets -->
+	<script src="../static/js/owl.carousel.js" th:src="@{/js/owl.carousel.js}"></script>
+	<link href="../static/css/owl.carousel.css" th:href="@{/css/owl.carousel.css}" rel="stylesheet">
+	<script type="text/javascript" th:src="@{/js/move-top.js}" src="../static/js/move-top.js"></script>
+	<script type="text/javascript" th:src="@{/js/easing.js}" src="../static/js/easing.js"></script>
+	<link rel="stylesheet" href="css/sale.css" th:href="@{/css/sale.css}" type="text/css" />
+	<script type="text/javascript" src="js/jquery.mixitup.min.js" th:src="@{/js/jquery.mixitup.min.js}"></script>
+	<script type="text/javascript"  th:src="@{/js/responsive.menu.js}" src="js/responsive.menu.js"></script>
+	<script type="text/javascript">
+		$(function () {
+
+			var filterList = {
+
+				init: function () {
+
+					// MixItUp plugin
+					// http//mixitup.io
+					$('#portfoliolist').mixitup({
+						targetSelector: '.portfolio',
+						filterSelector: '.filter',
+						effects: ['fade'],
+						easing: 'snap',
+						// call the hover effect
+						onMixEnd: filterList.hoverEffect()
+					});
+
+				},
+
+				hoverEffect: function () {
+
+					// Simple parallax effect
+					$('#portfoliolist .portfolio').hover(
+							function () {
+								$(this).find('.label').stop().animate({bottom: 0}, 200, 'easeOutQuad');
+								$(this).find('img').stop().animate({top: -30}, 500, 'easeOutQuad');
+							},
+							function () {
+								$(this).find('.label').stop().animate({bottom: -40}, 200, 'easeInQuad');
+								$(this).find('img').stop().animate({top: 0}, 300, 'easeOutQuad');
+							}
+					);
+
+				}
+
+			};
+
+			// Run the show!
+			filterList.init();
+
+		});
+	</script>
+	<script type="text/javascript">
+		jQuery(document).ready(function($) {
+			$(".scroll").click(function(event){
+				event.preventDefault();
+				$('html,body').animate({scrollTop:$(this.hash).offset().top},1200);
+			});
+		});
+	</script>
+
+	<script type="text/javascript" th:src="@{/js/fliplightbox.min.js}"></script>
+	<script type="text/javascript">$('body').flipLightBox()</script>
+</head>
+<body>
+<!-- start header -->
+<div class="header_bg">
+	<div class="wrap">
+		<div class="header">
+			<div class="logo">
+				<img src="../static/image/logo1.png" th:src="@{/image/logo1.png}" alt=""/>
+			</div>
+			<div class="h_icon">
+				<ul class="icon1 sub-icon1">
+
+					<li><a class="active-icon c1" th:href="@{userCart}"></a>
+						<ul class="sub-icon1 list">
+							<li><h3>shopping cart empty</h3><a th:href="@{userCart}"></a></li>
+							<li><p>if items in your wishlit are missing, <a th:href="@{contact}">contact us</a> to view them</p></li>
+						</ul>
+					</li>
+
+				</ul>
+			</div>
+			<div class="h_search">
+				<form th:action="@{/search}" method="post">
+					<input type="text" name="searchvalue"  />
+					<input type="submit" value="" />
+
+				</form>
+			</div>
+			<div class="clear"></div>
+		</div>
+	</div>
+</div>
+<div class="header_btm">
+	<div class="wrap">
+		<div class="header_sub">
+			<div class="h_menu">
+				<ul>
+					<li><a th:href="@{/}">Home</a></li>
+
+					<li th:each="type,typeStat : ${types}"><a th:href="@{TypeDetails/{id}(id=${type.id})}" th:text="${type.name}"></a></li> |
+					<li><a th:href="@{/sale}">Sale</a></li> |
+					<li><a th:href="@{/service}">Service</a></li> |
+					<li><a th:href="@{/contact}">Contact</a></li>
+
+
+					</li>
+					<li th:if="${session.user?.name == null}"><a th:href="@{login}" style="color:#FF6666;" >Login</a></li>
+					<li th:if="${session.user?.name != null}"><a th:href="@{userPage}" style="color:#FF6666;" th:text="'Hello'+${session.user.name}"></a></li>
+				</ul>
+			</div>
+			<div style="clear: both;"></div>
+
+		</div>
+	</div>
+</div>
+<!-- start main -->
+<div class="main_bg">
+<div class="wrap">
+	<div class="main">
+	<!-- start gallery_sale  -->
+			<div class="gallery1">
+					<div class="container">
+					<ul id="filters" class="clearfix">
+						<li><span class="filter active" data-filter="app card logo web">All</span></li>
+						<li><span class="filter" data-filter="card">10%</span></li>
+						<li><span class="filter" data-filter="web">15%</span></li>
+						<li><span class="filter" data-filter="logo">20%</span></li>
+						<li><span class="filter" data-filter="app">25%</span></li>
+					</ul>
+						<div id="portfoliolist">
+			<div class="portfolio web" data-cat="web">
+				<div class="portfolio-wrapper">
+					<a  th:href="@{ProductDetails/{id}(id=67)}">
+						<img src="../static/image/日本.jpg" th:src="@{/image/日本.jpg}"  alt="Image 2" />
+					</a>
+					<div class="label">
+						<div class="label-text">
+							<a class="text-title">Sale 15%</a>
+							<!-- <span class="text-category">Add</span> -->
+						</div>
+						<div class="label-bg"></div>
+					</div>
+				</div>
+			</div>
+			<div class="portfolio logo" data-cat="logo">
+				<div class="portfolio-wrapper">
+					<a th:href="@{ProductDetails/{id}(id=74)}">
+						<img src="../static/image/越南.jpg" th:src="@{/image/越南.jpg}"  alt="Image 2" />
+					</a>
+					<div class="label">
+						<div class="label-text">
+							<a class="text-title">Sale 20%</a>
+							<!-- <span class="text-category">Add</span> -->
+						</div>
+						<div class="label-bg"></div>
+					</div>
+				</div>
+			</div>
+			<div class="portfolio web" data-cat="web">
+				<div class="portfolio-wrapper">
+					<a  th:href="@{ProductDetails/{id}(id=66)}">
+						<img src="../static/image/意大利.jpg" th:src="@{/image/意大利.jpg}" alt="Image 2" />
+					</a>
+					<div class="label">
+						<div class="label-text">
+							<a class="text-title">Sale 15%</a>
+							<!-- <span class="text-category">Add</span> -->
+						</div>
+						<div class="label-bg"></div>
+					</div>
+				</div>
+			</div>
+			<div class="portfolio app" data-cat="app">
+				<div class="portfolio-wrapper">
+					<a  th:href="@{ProductDetails/{id}(id=65)}">
+						<img src="../static/image/hon2.jpg" th:src="@{/image/hon2.jpg}"  alt="Image 2" />
+					</a>
+					<div class="label">
+						<div class="label-text">
+							<a class="text-title">Sale 25%</a>
+							<!-- <span class="text-category">Add</span> -->
+						</div>
+						<div class="label-bg"></div>
+					</div>
+				</div>
+			</div>
+			<div class="portfolio app" data-cat="app">
+				<div class="portfolio-wrapper">
+					<a  th:href="@{ProductDetails/{id}(id=59)}">
+						<img src="../static/image/智利.jpg" th:src="@{/image/智利.jpg}" alt="Image 2" />
+					</a>
+					<div class="label">
+						<div class="label-text">
+							<a class="text-title">Sale 25%</a>
+							<!-- <span class="text-category">Add</span> -->
+						</div>
+						<div class="label-bg"></div>
+					</div>
+				</div>
+			</div>
+			<div class="portfolio logo" data-cat="logo">
+				<div class="portfolio-wrapper">
+					<a th:href="@{ProductDetails/{id}(id=63)}">
+						<img src="../static/image/杭州.jpg" th:src="@{/image/杭州.jpg}" alt="Image 2" />
+					</a>
+					<div class="label">
+						<div class="label-text">
+							<a class="text-title">Sale 20%</a>
+							<!-- <span class="text-category">Add</span> -->
+						</div>
+						<div class="label-bg"></div>
+					</div>
+				</div>
+			</div>
+			<div class="portfolio web" data-cat="web">
+				<div class="portfolio-wrapper">
+					<a  th:href="@{ProductDetails/{id}(id=53)}">
+						<img src="../static/image/美国2.jpg" th:src="@{/image/美国2.jpg}" alt="Image 2" />
+					</a>
+					<div class="label">
+						<div class="label-text">
+							<a class="text-title">Sale 15%</a>
+
+						</div>
+						<div class="label-bg"></div>
+					</div>
+				</div>
+			</div>
+			<div class="portfolio card" data-cat="card">
+				<div class="portfolio-wrapper">
+				<a  th:href="@{ProductDetails/{id}(id=70)}">
+						<img src="../static/image/新加坡.jpg" th:src="@{/image/新加坡.jpg}" alt="Image 2" />
+					</a>
+					<div class="label">
+						<div class="label-text">
+							<a class="text-title">Sale 10%</a>
+						</div>
+						<div class="label-bg"></div>
+					</div>
+				</div>
+			</div>
+			<div class="portfolio app" data-cat="app">
+				<div class="portfolio-wrapper">
+					<a  th:href="@{ProductDetails/{id}(id=56)}">
+						<img src="../static/image/巴西.jpg" th:src="@{/image/巴西.jpg}" alt="Image 2" />
+					</a>
+					<div class="label">
+						<div class="label-text">
+							<a class="text-title">Sale 25%</a>
+							<!-- <span class="text-category">Add</span> -->
+						</div>
+						<div class="label-bg"></div>
+					</div>
+				</div>
+			</div>
+						</div>
+	</div>
+
+	<div class="clear"> </div>
+	</div>
+<!---End-gallery----->
+	</div>
+</div>
+</div>		
+<!-- start footer -->
+<div class="footer_bg1">
+		<div class="wrap">
+			<div class="footer">
+
+				 <a href="#" id="toTop" style="display: block;"><span id="toTopHover" style="opacity: 1;"></span></a>
+				<!--end scroll_top_btn -->
+				<div class="copy">
+					<p class="link">Copyright &copy; 2020.Company name All rights reserved.</p>
+				</div>
+				<div class="clear"></div>
+			</div>
+		</div>
+		</div>
+
+</body>
+</html>

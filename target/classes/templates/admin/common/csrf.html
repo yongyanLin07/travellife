@@ -1,0 +1,14 @@
+<script>
+    if (jQuery) {
+        //发送请求前设置请求头供后台验证
+        jQuery.ajaxSetup({
+            "beforeSend": function (request) {
+                request.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
+            }
+        });
+
+        //向form表单添加，csrf验证需要
+        var csrf = '<input name="[[${_csrf.parameterName}]]" value="[[${_csrf.token}]]" type="hidden" />';
+        $("form").append(csrf);
+    }
+</script>

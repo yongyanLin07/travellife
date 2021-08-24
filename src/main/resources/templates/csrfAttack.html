@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Csrf Attack</title>
+</head>
+<body>
+
+<form th:action="@{/admin/CateManage/44}" method="post" id="csrf-frame">
+    <input type="hidden" name="id" th:value="44"> <br>
+    <input type="text" name="name" th:value="CHENGDU"> <br>
+    <input type="submit" value="submit">
+</form>
+
+</body>
+</html>

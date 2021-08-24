@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>管理员</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" th:href="@{/assets/images/favicon.png}" href="../../static/assets/images/favicon.png">
+    <title>Travel Life | Admin</title>
+    <script type="text/javascript" th:src="@{/js/adminPage.js}" src="../../static/js/adminPage.js"></script>
+     <link rel="stylesheet" th:href="@{/css/font-awesome-4.7.0/css/font-awesome.min.css}"  media="all">
+    <link rel="stylesheet" th:href="@{/lib/layui-v2.3.0/css/layui.css}"  media="all">
+    <link rel="stylesheet" th:href="@{/css/main.css}"  media="all">
+    <link th:href="@{/css/adminPage.css}" rel="stylesheet" media="all">
+    <link th:href="@{/css/allScripts.css}" rel="stylesheet" media="all">
+</head>
+
+<body>
+    
+<body class="timo-layout-page">
+<div class="layui-card">
+ 
+   <div class="layui-card-header timo-card-header">
+        <span><i class="fa fa-bars"></i> 商品管理</span>
+        <i class="layui-icon layui-icon-refresh refresh-btn"></i>
+    </div>
+        <div class="layui-row timo-card-screen">
+            <div class="pull-right screen-btn-group">
+                 
+               <a href="#" th:href="@{/admin/ProductAdd}">
+               <button id="delete" type="button" class="layui-btn"> 添加</button>
+               </a>
+            </div>
+        </div>
+    <!-- ============================================================== -->
+    <!-- Main wrapper - style you can find in pages.scss -->
+    <!-- ============================================================== -->
+    <div id="main-wrapper" data-navbarbg="skin6" data-theme="light" data-layout="vertical" data-sidebartype="full" data-boxed-layout="full">
+
+        <form action="#" id="myform" method="post" >
+            <div class="page-wrapper1">
+                        
+                        <div class="container-fluid">
+                            <!-- ============================================================== -->
+                            <!-- Start Page Content -->
+                            <!-- ============================================================== -->
+                               
+                                <div class="col-12">
+                                    <div class="card">
+                                        <div class="table-responsive">
+                                           
+                                          <table  class="layui-table timo-table">
+                                                <thead>
+                                                    <tr>
+
+                                                        <th scope="col">Id</th>
+                                                        <th scope="col">Name</th>
+                                                        <th scope="col">Category</th>
+                                                        <th scope="col">Img</th>
+                                                        <th scope="col">Price</th>
+                                                        <th scope="col">Stock</th>
+                                                        <th scope="col">Recommend</th>
+                                                        <th scope="col">Sale</th>
+                                                        <th scope="col">Manage</th>
+
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+
+                                                <tr th:each="product,iterStat : ${page.content}">
+                                                    <td th:text="${product.id}"></td>
+                                                    <td th:text="${product.name}"></td>
+                                                    <td th:text="${product.type.getName()}"></td>
+                                                    <td><img src="../../static/image/${product.img}" th:src="@{/image/{img}(img=${product.img})}" width="80" height="80"></td>
+                                                    <td th:text="${product.price}"></td>
+                                                    <td th:text="${product.stock}"></td>
+                                                    <td th:text="${product.recommend}"></td>
+                                                    <td th:text="${product.sale}"></td>
+                                                    <td>
+                                                        <a href="#" th:href="@{/admin/ProductManage/{id}/ProductModify(id=${product.id})}">修改</a>
+                                                        <a href="#" th:href="@{/admin/ProductManage/{id}/ProductDelete(id=${product.id})}">删除</a>
+                                                    </td>
+                                                </tr>
+
+                                                </tbody>
+                                            </table>
+                                            
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                               </div> 
+                               <div class="center">
+                                 
+                                 <ul class="pagination" th:if="${page.totalPages}>1">
+
+                                  <li><a href="#" th:href="@{/admin/ProductManage(page=${page.number-1})}">上一页</a></li>
+                                  <li><a href="#" th:href="@{/admin/ProductManage(page=${page.number+1})}">下一页</a></li>
+
+                                 </ul>
+            </div>
+            </div>
+           
+            </form>
+    </div>
+</div>
+    <!-- ============================================================== -->
+    <!-- Jquery -->
+    <!-- ============================================================== -->
+    <script src="../../static/assets/libs/jquery/dist/jquery.min.js" th:src="@{/assets/libs/jquery/dist/jquery.min.js}"></script>
+    <!-- Bootstrap tether Core JavaScript -->
+    <script src="../../static/assets/libs/popper.js/dist/umd/popper.min.js" th:src="@{/assets/libs/popper.js/dist/umd/popper.min.js}"></script>
+    <script src="../../static/assets/libs/bootstrap/dist/js/bootstrap.min.js" th:src="@{/assets/libs/bootstrap/dist/js/bootstrap.min.js}"></script>
+    <!-- slimscrollbar scrollbar JavaScript -->
+    <script src="../../static/assets/extra-libs/sparkline/sparkline.js" th:src="@{/assets/extra-libs/sparkline/sparkline.js}"></script>
+    <!--Wave Effects -->
+    <script src="../../static/js/waves.js" th:src="@{/js/waves.js}"></script>
+    <!--Menu sidebar -->
+    <script src="../../static/js/sidebarmenu.js" th:src="@{/js/sidebarmenu.js}"></script>
+    <!--Custom JavaScript -->
+    <script src="../../static/js/custom.min.js" th:src="@{/js/custom.min.js}"></script>
+    <th:block th:include="./common/include :: csrf" />
+            </body>
+            
+            </html>
+            
+            

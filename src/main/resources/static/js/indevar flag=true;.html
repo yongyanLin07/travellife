@@ -1,0 +1,132 @@
+var flag=true;
+    function check(obj){
+    	switch($(obj).attr('name')){
+    	case "id":
+    		if(obj.value == "")
+    			{
+    			alert("账号不能为空");
+    			flag=false;
+    			return flag;
+    		}else{flag=true;}
+    		if(obj.value != ""){
+    			var url = "useridcheck?id="+obj.value+"&"+new Date().getTime();
+                $.get(url,function(data){
+                	if(data == "false"){
+                		alert("此账号已被使用!");
+                		flag=false;
+                		return flag;
+                	}
+                }); 
+    		}else{flag=true;}
+    		re = /^[0-9]+$/;
+            if(!re.test(obj.value)) {
+            	alert("错误：账号必须只包含数字！");
+            	flag=false;
+                return flag;
+            }else{flag=true;}
+    		break;
+    	case "username":
+    		re = /^\w+$/;
+    		if(obj.value == ""){
+    			alert("用户名不能为空");
+    			flag=false;
+    			return flag;
+    			
+    		}else{
+    			flag=true;
+    		}
+    		if(!re.test(obj.value)){
+    			alert("错误：用户名必须只包含字母、数字和下划线！");
+    			flag=false;
+    			return flag;
+    			
+    		}else{flag=true;}
+    		break;
+    	case "sex":
+    		if(obj.value == ""){
+    			alert("请输入性别");
+    			flag=false;
+    			return flag;
+    			
+    		}else{flag=true;}
+    		if(obj.value != "M" && obj.value != "F"){
+    			alert("请按要求输入性别");
+    			flag=false;
+    			return flag;
+    		}else{flag=true;}
+    		break;
+    	case "password":
+    		if(obj.value == ""){
+    			alert("密码不能为空");
+    			flag=false;
+    			return flag;
+    		}else{flag=true;}
+    		if(obj.value.length<6){
+    			alert("密码不能小于6位");
+    			flag=false;
+    			return flag;
+    		}else{flag=true;}
+    		re = /[0-9]/;
+    		if(!re.test(obj.value)){
+    			alert("密码至少包含一个数字");
+    			flag=false;
+    			return flag;
+    		}else{flag=true;}
+    		re=/[a-z]/;
+    		if(!re.test(obj.value)){
+    			alert("密码至少包含一个小写字母");
+    			flag=false;
+    			return flag;
+    		}else{flag=true;}
+    		break;
+    	case "repassword":
+    		var form = document.getElementById("myform");
+    		if(form.password.value != obj.value){
+    			alert("再次输入密码错误");
+    			flag=false;
+    			return flag;
+    		}else{flag=true;}
+    		break;
+    	case "email":
+    		re=/^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+    		if(!re.test(obj.value)){
+    			alert("邮箱格式错误");
+    			flag=false;
+    			return flag;
+    		}else{flag=true;}
+    		break;
+    	case "veryCode":
+    		if(obj.value == ""){
+    			alert("请输入验证码");
+    			flag=false;
+    			return flag;
+    		}else{
+    			flag=true;
+    		}
+    		if(obj.value != ""){
+    			var url = "checkusernum?num="+encodeURI($(obj).val())+"&"+new Date().getTime();
+    			$.get(url,function(numdata){
+    				if(numdata == "false"){
+    					alert("验证码输入有误");
+    					flag=false;
+    					return flag;
+    				}
+    			});
+    		}else{flag=true;}
+    	}
+    }
+    
+    function checkForm(form) {
+    	var els = form.getElementsByTagName('input');
+    	for(var i=0;i<els.length;i++){
+    		if(els[i] != null){
+    			if(els[i].getAttribute("onmouseleave")){
+    				check(els[i]);
+    			}
+    		}
+    	}
+    	return flag;
+    }
+function changeCode(obj){
+	obj.src="getCode?"+new Date().getTime();
+}

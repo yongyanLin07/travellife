@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>测试是否存在xss漏洞</title>
+</head>
+<body>
+<h1>Xss Test</h1>
+<form th:action="@{/admin/CateManage/44}" method="post" id="csrf-frame">
+
+    <label>csrf token
+    <input name="_csrf" th:value="${_csrf.token}" type="text" />
+    </label>
+    <br>
+    <label>CateManage id
+        <input type="text" name="id" th:value="44"> <br>
+    </label>
+    <label>CateManage Name
+        <input type="text" name="name" value="<script>alert();<script>"> <br>
+    </label>
+    <input type="submit" value="submit">
+</form>
+
+</body>
+</html>
